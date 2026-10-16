@@ -59,10 +59,10 @@
     .brand-mark { width: 29px; height: 29px; display: grid; place-items: center; color: white; background: var(--accent); border-radius: 8px; font-size: .78rem; }
     .nav-links { display: flex; align-items: center; gap: 8px; padding: 5px; color: #475467; background: rgba(255, 255, 255, .72); border: 1px solid var(--line); border-radius: 11px; font-size: .86rem; font-weight: 500; box-shadow: 0 5px 18px rgba(15, 23, 42, .04); }
     .nav-links a { transition: color .2s ease; }
-    .nav-links a:not(.nav-cta) { padding: 8px 10px; border-radius: 7px; }
-    .nav-links a:not(.nav-cta):hover { color: var(--accent); background: var(--accent-soft); }
-    .nav-cta, .button { display: inline-flex; justify-content: center; align-items: center; gap: 9px; min-height: 46px; padding: 0 19px; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: white; font-weight: 600; cursor: pointer; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
-    .nav-cta:hover, .button:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+    .nav-links a { padding: 8px 10px; border-radius: 7px; transition: color .2s ease, background .2s ease; }
+    .nav-links a:hover { color: var(--accent); background: var(--accent-soft); }
+    .button { display: inline-flex; justify-content: center; align-items: center; gap: 9px; min-height: 46px; padding: 0 19px; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: white; font-weight: 600; cursor: pointer; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+    .button:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
     .menu-toggle { display: none; padding: 10px; border: 0; background: transparent; cursor: pointer; }
 
     .hero { padding: 116px 0 92px; overflow: hidden; }
@@ -136,7 +136,6 @@
       .nav-links { display: none; position: absolute; top: 82px; left: 0; right: 0; padding: 18px 20px 24px; flex-direction: column; align-items: stretch; gap: 0; background: var(--canvas); border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; }
       .nav-links.is-open { display: flex; }
       .nav-links a { padding: 12px 0; }
-      .nav-cta { text-align: center; margin-top: 7px; }
       .menu-toggle { display: block; }
       .hero { padding: 76px 0 60px; }
       .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 50px; }
@@ -174,7 +173,6 @@
         <a href="#projects">Projects</a>
         <a href="#services">Services</a>
         <a href="#contact">Contact</a>
-        <a class="nav-cta" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
       </div>
     </nav>
   </header>
