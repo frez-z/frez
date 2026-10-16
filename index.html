@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Farez is an electronic engineering student and embedded systems & robotics engineer building thoughtful hardware and software solutions.">
+  <title>Farez — Embedded Systems & Robotics Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #18181b;
+      --muted: #667085;
+      --line: #e3e7ed;
+      --canvas: #f8fafc;
+      --white: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: #eaf1ff;
+      --radius: 18px;
+      --shadow: 0 18px 50px rgba(15, 23, 42, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: Archivo, system-ui, sans-serif;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    img { display: block; max-width: 100%; }
+    :focus-visible { outline: 3px solid rgba(37, 99, 235, .4); outline-offset: 4px; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+    .eyebrow {
+      color: var(--accent);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .section { padding: 112px 0; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 46px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: "Space Grotesk", sans-serif; letter-spacing: -.045em; }
+    h1 { font-size: clamp(3.7rem, 8vw, 7.5rem); line-height: .91; margin-bottom: 28px; max-width: 820px; }
+    h2 { font-size: clamp(2.2rem, 4vw, 4rem); line-height: 1; margin-bottom: 18px; }
+    h3 { font-size: 1.25rem; line-height: 1.15; }
+    .lede { color: var(--muted); font-size: 1.1rem; max-width: 560px; }
+
+    .site-header { position: sticky; top: 0; z-index: 10; background: rgba(248, 250, 252, .9); border-bottom: 1px solid rgba(227, 231, 237, .8); backdrop-filter: blur(14px); }
+    nav { height: 82px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; flex-direction: column; gap: 1px; font-family: "Space Grotesk", sans-serif; }
+    .brand-name { color: var(--ink); font-size: 1.12rem; font-weight: 700; letter-spacing: -.04em; }
+    .brand-note { color: var(--accent); font-family: Archivo, sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .1em; line-height: 1.2; text-transform: uppercase; }
+    .brand-mark { width: 29px; height: 29px; display: grid; place-items: center; color: white; background: var(--accent); border-radius: 8px; font-size: .78rem; }
+    .nav-links { display: flex; align-items: center; gap: 8px; padding: 5px; color: #475467; background: rgba(255, 255, 255, .72); border: 1px solid var(--line); border-radius: 11px; font-size: .86rem; font-weight: 500; box-shadow: 0 5px 18px rgba(15, 23, 42, .04); }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:not(.nav-cta) { padding: 8px 10px; border-radius: 7px; }
+    .nav-links a:not(.nav-cta):hover { color: var(--accent); background: var(--accent-soft); }
+    .nav-cta, .button { display: inline-flex; justify-content: center; align-items: center; gap: 9px; min-height: 46px; padding: 0 19px; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: white; font-weight: 600; cursor: pointer; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+    .nav-cta:hover, .button:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+    .menu-toggle { display: none; padding: 10px; border: 0; background: transparent; cursor: pointer; }
+
+    .hero { padding: 116px 0 92px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 70px; }
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero-copy .lede { margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 12px; align-items: center; }
+    .button.secondary { color: var(--ink); background: transparent; border-color: var(--line); }
+    .button.secondary:hover { color: var(--accent); background: var(--white); border-color: var(--accent); }
+    .hero-meta { display: flex; gap: 22px; margin-top: 38px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+    .hero-meta strong { display: block; color: var(--ink); font-family: "Space Grotesk", sans-serif; font-size: 1.3rem; }
+    .hero-visual { position: relative; min-height: 540px; }
+    .hero-image { position: absolute; top: 0; right: 0; width: 78%; height: 400px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); }
+    .hero-image-label { position: absolute; top: 25px; left: 0; z-index: 1; padding: 11px 14px; background: var(--white); border: 1px solid var(--line); border-radius: 8px; font-size: .78rem; font-weight: 600; box-shadow: 0 10px 25px rgba(15,23,42,.08); }
+    .hero-image-label::before { content: ""; display: inline-block; width: 7px; height: 7px; margin: 0 8px 1px 0; border-radius: 50%; background: var(--accent); }
+    .hero-card { position: absolute; right: 0; bottom: 0; width: 62%; padding: 23px; background: var(--ink); color: white; border-radius: var(--radius); box-shadow: var(--shadow); }
+    .hero-card p { margin: 0 0 18px; color: #cbd5e1; font-size: .9rem; }
+    .code-lines { display: grid; gap: 8px; color: #93c5fd; font-family: monospace; font-size: .75rem; }
+    .code-lines span:nth-child(2) { color: #bfdbfe; padding-left: 18px; }
+    .code-lines span:nth-child(3) { color: #60a5fa; padding-left: 36px; }
+
+    .about { background: var(--white); border-block: 1px solid var(--line); }
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 95px; }
+    .about-copy p { color: var(--muted); font-size: 1.05rem; }
+    .skill-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
+    .skill { padding: 20px; background: var(--canvas); border: 1px solid var(--line); border-radius: 12px; }
+    .skill h3 { margin-bottom: 9px; font-size: 1rem; letter-spacing: -.02em; }
+    .skill p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .skill-icon { display: grid; place-items: center; width: 34px; height: 34px; margin-bottom: 18px; color: var(--accent); background: var(--accent-soft); border-radius: 8px; font-family: "Space Grotesk", sans-serif; font-weight: 700; }
+
+    .projects { background: var(--white); border-bottom: 1px solid var(--line); }
+    .projects-intro { max-width: 480px; color: var(--muted); }
+    .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .project { padding: 25px; background: var(--canvas); border: 1px solid var(--line); border-radius: var(--radius); transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+    .project:hover { border-color: #a8c3ff; box-shadow: 0 16px 34px rgba(37, 99, 235, .08); transform: translateY(-3px); }
+    .project-top { display: flex; justify-content: space-between; align-items: start; gap: 18px; }
+    .project-award { padding: 5px 8px; color: var(--accent); background: var(--accent-soft); border-radius: 5px; font-size: .68rem; font-weight: 700; white-space: nowrap; }
+    .project h3 { margin: 0 0 8px; font-size: 1.08rem; letter-spacing: -.025em; }
+    .project-meta { margin: 0 0 15px; color: var(--muted); font-size: .8rem; }
+    .project-meta strong { color: var(--ink); }
+    .project p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+    .project-tags span { padding: 5px 8px; color: #475467; background: var(--white); border: 1px solid var(--line); border-radius: 5px; font-size: .68rem; font-weight: 600; }
+
+    .services { background: var(--canvas); }
+    .services-intro { max-width: 450px; color: var(--muted); }
+    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .service { min-height: 386px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+    .service:hover { border-color: #a8c3ff; box-shadow: 0 16px 34px rgba(37, 99, 235, .09); transform: translateY(-4px); }
+    .service-image { width: 100%; height: 148px; object-fit: cover; border-bottom: 1px solid var(--line); }
+    .service-content { display: flex; flex: 1; flex-direction: column; padding: 22px 24px 24px; }
+    .service-number { color: var(--accent); font-family: "Space Grotesk", sans-serif; font-size: .82rem; font-weight: 700; }
+    .service h3 { margin: 14px 0 10px; }
+    .service p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .service-arrow { align-self: end; margin-top: auto; padding-top: 18px; color: var(--accent); font-size: 1.3rem; }
+
+    .contact { background: var(--ink); color: white; }
+    .contact .eyebrow { color: #93c5fd; }
+    .contact-grid { display: grid; grid-template-columns: 1fr; max-width: 720px; align-items: start; }
+    .contact .lede { color: #aeb8c7; }
+    .socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+    .socials a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 13px; border: 1px solid #3f4753; border-radius: 7px; color: #dbe4ef; font-size: .83rem; transition: border-color .2s ease, color .2s ease; }
+    .socials a:hover { color: white; border-color: #93c5fd; }
+    .socials svg { width: 16px; height: 16px; }
+    footer { padding: 24px 0; background: #111214; color: #87909d; font-size: .78rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+
+    @media (max-width: 800px) {
+      .wrap { width: min(100% - 32px, 600px); }
+      .section { padding: 78px 0; }
+      .nav-links { display: none; position: absolute; top: 82px; left: 0; right: 0; padding: 18px 20px 24px; flex-direction: column; align-items: stretch; gap: 0; background: var(--canvas); border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; }
+      .nav-links.is-open { display: flex; }
+      .nav-links a { padding: 12px 0; }
+      .nav-cta { text-align: center; margin-top: 7px; }
+      .menu-toggle { display: block; }
+      .hero { padding: 76px 0 60px; }
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+      .hero-visual { min-height: 450px; }
+      .hero-image { height: 340px; }
+      .section-heading { display: block; margin-bottom: 30px; }
+      .services-intro { margin-top: 18px; }
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-grid { grid-template-columns: 1fr; }
+      .contact-grid { gap: 34px; }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 3.55rem; }
+      .hero-actions { align-items: stretch; flex-direction: column; }
+      .hero-actions .button { width: 100%; }
+      .hero-meta { gap: 14px; }
+      .skill-list, .service-grid { grid-template-columns: 1fr; }
+      .footer-inner { align-items: flex-start; flex-direction: column; gap: 7px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Farez home"><span class="brand-name">Farez</span><span class="brand-note">EE student and coffee</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Electronic engineering / 01</div>
+          <h1>Hi, I'm <em>Farez</em>.</h1>
+          <p class="lede">Electronic Engineering Student.</p>
+          <p class="lede">I work across the full build: wiring sensors, writing firmware, modelling parts, and testing the result until it works reliably.</p>
+          <div class="hero-actions">
+            <a class="button" href="#services">Explore services <span aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="#projects">View experience &amp; projects</a>
+            <a class="button secondary" href="#contact">Get in touch</a>
+          </div>
+          <div class="hero-meta">
+            <div><strong>09</strong> services</div>
+            <div><strong>06</strong> project highlights</div>
+            <div><strong>05</strong> skill areas</div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <span class="hero-image-label">Currently building</span>
+          <img class="hero-image" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1100&q=85" alt="Close-up of a green electronic circuit board">
+          <div class="hero-card">
+            <p>From sensor readings to a finished prototype.</p>
+            <div class="code-lines"><span>01 // initialise_system()</span><span>02   sensors.connect()</span><span>03   robot.move_forward()</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="wrap about-grid">
+        <div class="about-copy">
+          <div class="eyebrow">How I work / 02</div>
+          <h2>I like working close to the hardware.</h2>
+          <p>My projects usually start with a practical question: what needs to be measured, controlled, or made easier? From there I move between the bench, CAD, and code — testing assumptions as I go.</p>
+          <p>I have worked on power monitoring, autonomous vehicles, machine vision, automotive electronics, and tolling systems. The common thread is simple: make the system understandable, then make it dependable.</p>
+        </div>
+        <div class="skill-list">
+          <article class="skill"><div class="skill-icon">01</div><h3>Embedded Systems &amp; IoT</h3><p><strong>Advanced:</strong> ESP32, STM32, Raspberry Pi, system integration, sensor interfacing, and real-time data acquisition.</p></article>
+          <article class="skill"><div class="skill-icon">02</div><h3>Programming Languages</h3><p><strong>Advanced:</strong> C++, C#, Python, Kotlin, JavaScript, and PLC programming for embedded, mobile, and desktop applications.</p></article>
+          <article class="skill"><div class="skill-icon">03</div><h3>3D Design &amp; Prototyping</h3><p><strong>Intermediate:</strong> Fusion 360 CAD modeling and rapid prototyping using 3D printing.</p></article>
+          <article class="skill"><div class="skill-icon">04</div><h3>PCB Design</h3><p><strong>Intermediate:</strong> Schematic design, PCB layout, and circuit simulation using EasyEDA, Proteus, and Altium Designer.</p></article>
+          <article class="skill"><div class="skill-icon">05</div><h3>Machine Learning</h3><p><strong>Basic:</strong> Supervised learning, YOLO, regression models, and integration into embedded vision systems.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects section" id="projects">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><div class="eyebrow">Selected work / 03</div><h2>Projects I’ve actually built.</h2></div>
+          <p class="projects-intro">A few university projects and competitions that show how I approach embedded systems, IoT, computer vision, and robotics.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project">
+            <div class="project-top"><h3>Smart Power Meter with Agentic AI</h3><span class="project-award">2nd place · Best Prototype</span></div>
+            <p class="project-meta">iMiNe 2.0 · <strong>Team lead &amp; System Engineer</strong></p>
+            <p>Designed sensor-to-server workflows for agentic AI systems using RESTful APIs with iOS mobile device integration.</p>
+            <div class="project-tags"><span>ESP32</span><span>IoT</span><span>REST API</span><span>AI</span></div>
+          </article>
+          <article class="project">
+            <div class="project-top"><h3>Smart Power Meter with Future Prediction</h3><span class="project-award">1st place</span></div>
+            <p class="project-meta">Chipin Competition · <strong>Team lead &amp; Hardware Engineer</strong></p>
+            <p>Coordinated team efforts to deliver a working system within a three-day deadline and built a system to predict future electricity usage.</p>
+            <div class="project-tags"><span>Embedded</span><span>Prediction</span><span>Hardware</span></div>
+          </article>
+          <article class="project">
+            <div class="project-top"><h3>Industrial Component Classification</h3><span class="project-award">1st place</span></div>
+            <p class="project-meta">Hackathon Challenge · AI Track · <strong>Team lead &amp; ML Engineer</strong></p>
+            <p>Implemented and optimised a machine learning model for electrical component classification on Raspberry Pi 5.</p>
+            <div class="project-tags"><span>Raspberry Pi 5</span><span>Machine Learning</span><span>Computer Vision</span></div>
+          </article>
+          <article class="project">
+            <div class="project-top"><h3>Autonomous Urban Driving Car</h3><span class="project-award">2nd place</span></div>
+            <p class="project-meta">Malaysia FIRA Roboworld Cup 2025 · <strong>Embedded &amp; ML Engineer</strong></p>
+            <p>Developed an end-to-end pipeline involving hardware interfacing, data collection, and ML training for lane following and road sign detection.</p>
+            <div class="project-tags"><span>Robotics</span><span>Embedded</span><span>Computer Vision</span></div>
+          </article>
+          <article class="project">
+            <div class="project-top"><h3>1:1 Scale Hydrogen Fuel Cell Vehicle</h3><span class="project-award">Participant</span></div>
+            <p class="project-meta">Shell Eco-Marathon 2025 Qatar · <strong>Head of Electrical Department</strong></p>
+            <p>Designed and implemented an embedded Light Control Module with real-time signal interfacing and hardware-level integration for automotive systems.</p>
+            <div class="project-tags"><span>Automotive</span><span>LCM</span><span>Energy systems</span></div>
+          </article>
+          <article class="project">
+            <div class="project-top"><h3>Automatic License Recognition Tolling System</h3><span class="project-award">Gold award · 2nd place</span></div>
+            <p class="project-meta">Diploma Final Year Project · <strong>Project leader</strong></p>
+            <p>Designed an e-wallet system architecture focused on user authentication and payment processing, with automated tolling using image processing and computer vision.</p>
+            <div class="project-tags"><span>Computer Vision</span><span>Image Processing</span><span>Fintech</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="services section" id="services">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><div class="eyebrow">Ways I can help / 04</div><h2>Need a hand with the build?</h2></div>
+          <p class="services-intro">I can help you move from a rough circuit or working prototype to something cleaner, easier to test, and ready to use.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service"><img class="service-image" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Engineer working at a computer during a technical consultation"><div class="service-content"><span class="service-number">01</span><h3>Consultation</h3><p>Technical guidance on hardware selection, architecture planning, and project feasibility.</p><span class="service-arrow" aria-hidden="true">↗</span></div></article>
+          <article class="service"><img class="service-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwMerKlhr8FFqfWOVZKRLQ7hE2R_ewHIPeBRbE2WMt3fymVKjjm8--CG4&amp;s=10" alt="Electronic circuit schematic with component symbols, inductors, capacitors, and transistor stages"><div class="service-content"><span class="service-number">02</span><h3>Electronic Schematic Design</h3><p>Professional schematic capture using industry-standard tools.</p><span class="service-arrow" aria-hidden="true">↗</span></div></article>
+          <article class="service"><img class="service-image" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Close-up of components on a green printed circuit board"><div class="service-content"><span class="service-number">03</span><h3>PCB Design &amp; Fabrication</h3><p>Turn a tested breadboard or perfboard prototype into a clean, manufacturable PCB layout.</p><span class="service-arrow" aria-hidden="true">↗</span></div></article>
+          <article class="service"><img class="service-image" src="https://images.unsplash.com/photo-1603114595741-e60bf9486e04?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Close-up of a technician soldering an electronics board"><div class="service-content"><span class="service-number">04</span><h3>Soldering Service</h3><p>Clean, reliable professional component-level soldering.</p><span class="service-arrow" aria-hidden="true">↗</span></div></article>
+          <article class="service"><img class="service-image" src="https://images.unsplash.com/photo-1560619670-df4199b726b3?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Person soldering components onto a perfboard"><div class="service-content"><span class="service-number">05</span><h3>Perfboard/Donut Board Soldering &amp; Routing</h3><p>Neat point-to-point wiring and soldering on stripboard/donut boards.</p><span class="service-arrow" aria-hidden="true">↗</span></div></article>
+          <article class="service"><img class="service-image" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Code editor showing software development work"><div class="service-content"><span class="service-number">06</span><h3>Project Coding</h3><p>Custom firmware and software development for embedded hardware and microcontrollers.</p><span class="service-arrow" aria-hidden="true">↗</span></div></article>
+          <article class="service"><img class="service-image" src="https://images.unsplash.com/photo-1586920740199-47ce35183cfd?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Complete electronic prototype assembled in a compact enclosure"><div class="service-content"><span class="service-number">07</span><h3>End-to-End Prototyping</h3><p>Bringing ideas from concept to working prototype using breadboards or perfboards, supporting both SBCs like Raspberry Pi and microcontrollers like ESP32/Arduino.</p><span class="service-arrow" aria-hidden="true">↗</span></div></article>
+          <article class="service"><img class="service-image" src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Fusion 360 style 3D CAD model being designed on a computer"><div class="service-content"><span class="service-number">08</span><h3>3D Model Design</h3><p>Custom CAD modeling tailored for functional parts, mounts, and enclosures.</p><span class="service-arrow" aria-hidden="true">↗</span></div></article>
+          <article class="service"><img class="service-image" src="https://images.unsplash.com/photo-1563520239648-a24e51d4b570?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Bambu Lab A1 Mini style desktop 3D printer creating a part"><div class="service-content"><span class="service-number">09</span><h3>3D Printing Service</h3><p>High-precision printing using a Bambu Lab A1 Mini, specializing in functional PLA and PETG parts.</p><span class="service-arrow" aria-hidden="true">↗</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact section" id="contact">
+      <div class="wrap contact-grid">
+        <div>
+          <div class="eyebrow">Start a conversation / 05</div>
+          <h2>Have a project in mind?</h2>
+          <p class="lede">Tell me what you are building, where you are stuck, or what you would like to explore. I will get back to you soon.</p>
+          <div class="socials">
+            <a href="https://wa.me/601137902557" target="_blank" rel="noreferrer" aria-label="Contact Farez on WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M8.5 8.5c.3-.5.6-.5.9-.5l.7 1.7c.1.3.1.5-.1.7l-.5.6c.7 1.2 1.5 1.9 2.7 2.5l.5-.6c.2-.2.4-.3.7-.2l1.7.8c.3.1.3.4.2.7-.2.7-.8 1.2-1.5 1.2-2.8-.3-5.9-3.1-6.3-5.8-.1-.5.3-1 .5-1.1Z"/></svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><span>© 2026 Farez. Made in the lab.</span><span>Electronic engineering · Embedded systems · Robotics</span></div></footer>
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const links = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => {
+      const isOpen = links.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    });
+    links.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      links.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open navigation menu');
+    }));
+  </script>
+</body>
+</html>
